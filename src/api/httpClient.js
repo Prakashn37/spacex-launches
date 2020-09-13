@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-unfetch';
 
-export function httpClient(baseURL) {
+export function httpClient() {
   return {
     get: (path, options) => {
-      return fetch(baseURL + path, options).then(res => {
+      return fetch(path, options).then(res => {
         if (!res.ok) {
           throw new Error(res.statusText);
         }
@@ -13,7 +13,7 @@ export function httpClient(baseURL) {
     },
 
     post: (path, body, options = {}) => {
-      return fetch(baseURL + path, {
+      return fetch(path, {
         ...options,
         method: 'POST',
         body: JSON.stringify(body),

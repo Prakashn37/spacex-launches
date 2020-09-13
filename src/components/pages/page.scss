@@ -1,0 +1,44 @@
+@import "../../styles/variables.scss";
+.pageContainer {
+  display: grid;
+  h1 {
+  }
+  // @media #{$Mobile} {
+  //   grid-template-rows: 1fr;
+  // }
+
+  @media #{$Tablet} {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  @media #{$MdDesktop} {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  @media #{$LargeDesktop} {
+    grid-template-columns: 1fr 3fr;
+  }
+
+  .filterWrapper {
+    min-width: 200px;
+  }
+  .cardsWrapper {
+    display: grid;
+    grid-gap: 2rem;
+    @media #{$Mobile} {
+      grid-template-columns: 1fr;
+    }
+
+    @media #{$Tablet} {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media #{$MdDesktop} {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    @media #{$LargeDesktop} {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+}

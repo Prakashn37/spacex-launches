@@ -1,0 +1,13 @@
+.button {
+  height: 20px;
+  background-color: rgb(206, 255, 206);
+  border-radius: 10%;
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+  &.active {
+    color: black;
+    font-weight: 500;
+    background-color: rgb(117, 184, 117);
+  }
+}

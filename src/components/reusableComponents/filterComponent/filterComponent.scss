@@ -1,0 +1,12 @@
+.filterWrapper {
+  .launchYear {
+    .launchesYearWrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 5px;
+      .button {
+        margin: 5px 0 5px 0;
+      }
+    }
+  }
+}

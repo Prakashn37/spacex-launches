@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 const Head = () => {
   return (
     <Helmet>
-      <title>React SSR Boilerplate</title>
+      <title>SpaceX launches</title>
 
       <meta charSet="UTF-8" />
       <meta
