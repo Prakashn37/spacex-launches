@@ -13,6 +13,7 @@ const Home = props => {
       return data.launches || [];
     })
   );
+  const [loading, setLoading] = useState(false);
   return (
     <React.Fragment>
       <h1>SpaceX Launch Programs</h1>
@@ -22,11 +23,16 @@ const Home = props => {
           search={props.history.location.search}
           push={props.history.push}
           setLaunches={setLaunches}
+          setLoading={setLoading}
         />
         <div className="cardsWrapper">
-          {launches.map(launch => (
-            <Card key={launch.flight_number} {...launch} />
-          ))}
+          {!loading && launches.length
+            ? launches.map(launch => (
+                <Card key={launch.flight_number} {...launch} />
+              ))
+            : null}
+          {loading ? <h2>Loading ...</h2> : null}
+          {!loading && !launches.length ? <h2>No Missions</h2> : null}
         </div>
       </div>
     </React.Fragment>

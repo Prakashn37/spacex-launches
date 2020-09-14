@@ -13,7 +13,7 @@ const { PUBLIC_URL = '' } = process.env;
 // This export is used by our initialization code in /scripts
 export const app = express();
 
-app.use(compression());
+app.use(compression({ level: 9 }));
 app.use(helmet());
 app.use(bodyParser.json());
 

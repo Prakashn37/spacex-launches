@@ -8,6 +8,9 @@ const FilterComponent = props => {
   const { search, push } = props;
   const currentYear = new Date().getFullYear();
   const searchParams = new URLSearchParams(search);
+
+  let mountRef = useRef(false);
+
   const [launchYear, setLaunchYear] = useState(
     Number(searchParams.get('launch_year'))
   );
@@ -37,8 +40,14 @@ const FilterComponent = props => {
 
   useEffect(() => {
     if (!isServer) {
+      if (mountRef.current) {
+        props.setLoading(true);
+      } else {
+        mountRef.current = true;
+      }
       fetchDataLaunchesData().then(data => {
         props.setLaunches(data.launches);
+        props.setLoading(false);
       });
     }
     const searchParams = new URLSearchParams(search);
