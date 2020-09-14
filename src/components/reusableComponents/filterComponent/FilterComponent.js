@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ToggleComponent from '../toggleComponent/ToggleComponent';
-import {
-  fetchDataLaunchesDataWithParams,
-  isServer
-} from '../../../utils/assetUtils';
+import { isServer, fetchDataLaunchesData } from '../../../utils/assetUtils';
 import Button from '../button/Button';
 import './filterComponent.scss';
 
 const FilterComponent = props => {
+  const { search, push } = props;
   const currentYear = new Date().getFullYear();
-  const [launchYear, setLaunchYear] = useState(2006);
-  const [successfulLaunch, setSuccessfulLaunch] = useState(false);
-  const [successfulLanding, setSuccessfulLanding] = useState(false);
-
-  const hasMount = useRef(false);
+  const searchParams = new URLSearchParams(search);
+  const [launchYear, setLaunchYear] = useState(
+    Number(searchParams.get('launch_year'))
+  );
+  const [successfulLaunch, setSuccessfulLaunch] = useState(
+    searchParams.get('launch_success')
+  );
+  const [successfulLanding, setSuccessfulLanding] = useState(
+    searchParams.get('land_success')
+  );
 
   const years = [];
   for (let year = 2006; year <= currentYear; year++) {
@@ -21,31 +24,28 @@ const FilterComponent = props => {
   }
 
   const toggleSuccessfulLaunch = flag => {
-    setSuccessfulLaunch(flag);
+    updateSearchParams('launch_success', flag, push);
   };
 
   const toggleSuccessfulLanding = flag => {
-    setSuccessfulLanding(flag);
+    updateSearchParams('land_success', flag, push);
+  };
+
+  const updateLaunchYear = year => {
+    updateSearchParams('launch_year', year, push);
   };
 
   useEffect(() => {
     if (!isServer) {
-      if (hasMount.current) {
-        fetchDataLaunchesDataWithParams({
-          launch_success: successfulLaunch,
-          land_success: successfulLanding,
-          launch_year: launchYear
-        }).then(data => {
-          props.setLaunches(data.launches);
-        });
-      } else {
-        hasMount.current = true;
-        fetchDataLaunchesDataWithParams({}).then(data => {
-          props.setLaunches(data.launches);
-        });
-      }
+      fetchDataLaunchesData().then(data => {
+        props.setLaunches(data.launches);
+      });
     }
-  }, [successfulLaunch, successfulLanding, launchYear]);
+    const searchParams = new URLSearchParams(search);
+    setLaunchYear(Number(searchParams.get('launch_year')));
+    setSuccessfulLanding(searchParams.get('land_success'));
+    setSuccessfulLaunch(searchParams.get('launch_success'));
+  }, [search]);
 
   return (
     <div className="filterWrapper">
@@ -57,7 +57,7 @@ const FilterComponent = props => {
             <Button
               key={year}
               clickHandler={() => {
-                setLaunchYear(year);
+                updateLaunchYear(year);
               }}
               active={launchYear === year ? 'active' : ''}
               buttonText={year}
@@ -81,6 +81,16 @@ const FilterComponent = props => {
       </div>
     </div>
   );
+};
+
+export const updateSearchParams = (key, value, push) => {
+  const searchParams = new URLSearchParams(window.location.search);
+  searchParams.set(key, value);
+  const existingPath = window.location.pathname + window.location.search;
+  const newPath = `/?${searchParams.toString()}`;
+  if (newPath !== existingPath) {
+    push(newPath);
+  }
 };
 
 export default FilterComponent;

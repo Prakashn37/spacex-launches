@@ -2,7 +2,6 @@
   margin-bottom: 10px;
   padding: 1rem;
   max-width: 350px;
-
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   img {
@@ -12,18 +11,22 @@
     }
     border-radius: 0.5rem;
     background: #dbdbdb;
+    width: 100%;
+    max-width: 350px;
+    max-height: 350px;
   }
   .container {
+    flex-grow: 4;
     padding: 2px 16px;
     div {
       margin-bottom: 5px;
-      &.missionName{
+      &.missionName {
         margin-bottom: 10px;
         color: rgb(142, 142, 255);
       }
       font-weight: 600;
       span {
-        &::before{
+        &::before {
           content: " ";
         }
         text-align: center;

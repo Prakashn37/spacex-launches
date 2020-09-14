@@ -7,7 +7,7 @@ const Card = props => {
     <React.Fragment>
       <div className="card">
         {/* <img src={links.mission_patch_small} alt="Avatar" /> */}
-        <img src={links.mission_patch_small} alt="Avatar" />
+        <img src={links.mission_patch_small} alt={mission_name} />
         <div className="container">
           <div className="missionName">{mission_name}</div>
           <div className="launchYear">

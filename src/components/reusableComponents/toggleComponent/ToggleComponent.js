@@ -13,14 +13,14 @@ const ToggleComponent = props => {
           clickHandler={() => {
             clickHandler(true);
           }}
-          active={flag}
+          active={/true/.test(flag)}
           buttonText="True"
         />
         <Button
           clickHandler={() => {
             clickHandler(false);
           }}
-          active={!flag}
+          active={/false/.test(flag)}
           buttonText="False"
         />
       </div>
