@@ -5,10 +5,16 @@ export function imagePath(assetName) {
   return `${process.env.PUBLIC_URL}/images/${assetName}`;
 }
 
+export const isServer = !(typeof window !== 'undefined');
+
 export const filterURLGenerator = (params = {}) => {
   let reqURL = 'https://api.spaceXdata.com/v3/launches';
   if (!('limit' in params)) {
-    params.limit = 100;
+    if (isServer) {
+      params.limit = 10;
+    } else {
+      params.limit = 100;
+    }
   }
   reqURL = new URL(reqURL);
   reqURL.search = new URLSearchParams(params).toString();

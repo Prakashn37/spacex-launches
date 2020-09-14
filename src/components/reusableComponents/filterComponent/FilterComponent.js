@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ToggleComponent from '../toggleComponent/ToggleComponent';
-import { fetchDataLaunchesDataWithParams } from '../../../utils/assetUtils';
+import {
+  fetchDataLaunchesDataWithParams,
+  isServer
+} from '../../../utils/assetUtils';
 import Button from '../button/Button';
 import './filterComponent.scss';
 
@@ -26,16 +29,21 @@ const FilterComponent = props => {
   };
 
   useEffect(() => {
-    if (hasMount.current) {
-      fetchDataLaunchesDataWithParams({
-        launch_success: successfulLaunch,
-        land_success: successfulLanding,
-        launch_year: launchYear
-      }).then(data => {
-        props.setLaunches(data.launches);
-      });
-    } else {
-      hasMount.current = true;
+    if (!isServer) {
+      if (hasMount.current) {
+        fetchDataLaunchesDataWithParams({
+          launch_success: successfulLaunch,
+          land_success: successfulLanding,
+          launch_year: launchYear
+        }).then(data => {
+          props.setLaunches(data.launches);
+        });
+      } else {
+        hasMount.current = true;
+        fetchDataLaunchesDataWithParams({}).then(data => {
+          props.setLaunches(data.launches);
+        });
+      }
     }
   }, [successfulLaunch, successfulLanding, launchYear]);
 

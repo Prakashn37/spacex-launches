@@ -1,4 +1,11 @@
+@import "../../../styles/variables.scss";
+
 .filterWrapper {
+  background-color: #ffffff;
+  padding: 5px;
+  @media #{$Mobile} {
+    margin-bottom: 20px;
+  }
   .launchYear {
     .launchesYearWrapper {
       display: grid;
