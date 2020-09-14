@@ -27,7 +27,7 @@ export const filterURLGenerator = (search, limit) => {
   let reqURL = 'https://api.spaceXdata.com/v3/launches';
   reqURL = new URL(reqURL);
   let searchParams = new URLSearchParams(search);
-  searchParams.limit = limit;
+  searchParams.set('limit', limit);
   reqURL.search = searchParams.toString();
   return reqURL.href;
 };
