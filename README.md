@@ -1,5 +1,9 @@
 # React Server Side Rendering Boilerplate ⚛️
 
+## Running at
+
+https://prakash-spacex-launches.herokuapp.com/
+
 ## Initial setup
 
 - `npm install`
@@ -23,6 +27,8 @@
   Limit in the API call (Server side alone) has been limited (To decrease HTML size, by loading only visible content)
   
   Link to Lighthouse report
+  
+  Note: Performance may vary due to limited nature of hosting service.
   
   https://drive.google.com/drive/folders/17JkUCjUNripUmps0siQ3yDJTgBz8lQ4E
   
