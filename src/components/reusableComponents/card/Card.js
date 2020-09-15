@@ -2,7 +2,14 @@ import React from 'react';
 import './card.scss';
 
 const Card = props => {
-  const { mission_name, launch_year, links, mission_id } = props;
+  const {
+    mission_name,
+    launch_year,
+    links,
+    mission_id,
+    launch_success,
+    land_success
+  } = props;
   return (
     <React.Fragment>
       <div className="card">
@@ -24,11 +31,11 @@ const Card = props => {
           </div>
           <div className="successfulLaunch">
             Successful Launch:
-            <span>{launch_year}</span>
+            <span>{(!!launch_success).toString()}</span>
           </div>
           <div className="successfulLanding">
             Successful Landing:
-            <span>{launch_year}</span>
+            <span>{(!!land_success).toString()}</span>
           </div>
         </div>
       </div>

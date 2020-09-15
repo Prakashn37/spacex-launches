@@ -1,4 +1,10 @@
 .button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   height: 20px;
   background-color: rgb(206, 255, 206);
   border-radius: 10%;

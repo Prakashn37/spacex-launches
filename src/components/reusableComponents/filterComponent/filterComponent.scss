@@ -6,6 +6,13 @@
   @media #{$Mobile} {
     margin-bottom: 20px;
   }
+  .successfulLaunch,
+  .successfulLanding,
+  .launchYear {
+    h3 {
+      text-decoration: underline;
+    }
+  }
   .launchYear {
     .launchesYearWrapper {
       display: grid;
